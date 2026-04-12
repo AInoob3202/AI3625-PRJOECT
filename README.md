@@ -1,4 +1,4 @@
-<img width="186" height="254" alt="image" src="https://github.com/user-attachments/assets/87e4c8bb-1d0a-48fa-80c6-ef562e08b056" /># SAM3
+# SAM3
 # 4.11
 ## image feature失真情况
 做了一下imagefeature在
@@ -6,18 +6,23 @@
 - QWen模型微调后ViT pre-merger（dim=1024）
 - decoder输入的 projected（dim=256）
 三个状态处的可视化（PCA）
+
 <img width="377" height="1056" alt="image" src="https://github.com/user-attachments/assets/b880240f-95a5-4e0c-93b6-b10db08a4554" />
 
 **计算方式为：以原始的qwen模型的premerger图像特征为基准，计算余弦相似度loss（orig是没有微调的qwen的premerger）**
-通过30个sample的评估，
-三个状态处的loss为：
+
+通过30个sample的评估，三个状态处的loss为：
+
 <img width="387" height="128" alt="image" src="https://github.com/user-attachments/assets/17b67c82-9425-49da-92d1-2aff19f5271b" />
 
 所以直接拿矩阵投影的失真很严重
 
 不过可以通过三个状态处的特征可视化图发现目前projector是可以保持图中实例的大部分特征，但是边缘和实例中心不够饱满
+
 <img width="185" height="261" alt="image" src="https://github.com/user-attachments/assets/aadd8fb0-657d-4ac1-b340-16c53864ea4b" />
+
 <img width="186" height="254" alt="image" src="https://github.com/user-attachments/assets/1ee8f6fb-37fc-4a2b-a618-443248aa6f53" />
+
 这个右下角的人的肚子都是空白的
 
 
