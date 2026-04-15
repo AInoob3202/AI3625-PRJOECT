@@ -2,7 +2,54 @@
 
 # 4.15
 
+发现一个多分割目标的数据集：
+https://github.com/jdg900/MMR
+
+## v2的大量数据训练
+加入SAM3encoder，训练配置为：
+- 192k数据，refcoco按照50%去采样，其余数据占剩下50%
+- 保守学习率，冻结SAM3Encoder、QwenEncoder、训练SAM3neck、LLM、SAM3decoder
+- 在refcocoeval上进行测试
+- batchsize为64，image_min_pixels为768，epoch为1
+- loss为1的text+1的seg，seg为2的BCE+0.5的Dice
+
+
+因为采样这个机制，refcoco大概12w条数据只有96000条被采样到了，所以这一个epoch只能过一遍而且没过完全。
+
+得到的ciou大约为0.6x，通过分割可视化可以看到
+
+### 一些好的样本：
+
+![00006](https://github.com/user-attachments/assets/fbd7126b-56ce-4d5b-9b07-7b02c6158ab8)
+
+![00041](https://github.com/user-attachments/assets/c3b78015-ac5f-40dd-b256-fa9540225a79)
+
+### 一些欠分割的样本：
+
+![00005](https://github.com/user-attachments/assets/d6ea2cfe-1e8c-4e49-b0d2-069914c1948a)
+![00038](https://github.com/user-attachments/assets/0230f8b0-c7d2-40b7-beca-460811ee9001)
+
+### 一些过分割的样本：
+
+![00008](https://github.com/user-attachments/assets/44815f8b-5ed0-4962-bc54-6dae725e39f3)
+![00007](https://github.com/user-attachments/assets/b9eae2c7-18e1-4c1d-9c3f-cff179b04e83)
+
+
+### 训练曲线：
+
 <img width="963" height="772" alt="image" src="https://github.com/user-attachments/assets/e83b2cd5-c755-4e76-ae22-19c365b3b170" />
+
+## v2的一些小测试
+
+因为这个ciou太拉跨了（可能是因为模型变更加复杂，而且SAM3的Encoder和QWEN的Encoder不一样，所以需要多训才能让targetProjector和decoder充分发挥性能，但是目前的训练量有点少）。
+
+所以就做了个测试：只修改数据量和epoch（50个）保持其他所有训练配置不变：
+- 只训练一个refcoco样本，复制64张作为一个batch，最后也在这一张图上进行eval，但是ciou没眼看（0.2）
+- 然后修改了BCE权重到0.5，Dice权重到2（就是互换了权重），发现segloss降低得更快,然后ciou保障（但还是很低，0.6）
+
+所以从这个得出结论：BCE大的话，mask基本都龟缩在GT的内部，调高DICE反而能减少这种现象。
+
+但是ciou上不去，claude也说模型没啥问题。
 
 
 
