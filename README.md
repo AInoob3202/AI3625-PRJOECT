@@ -5,6 +5,8 @@
 发现一个多分割目标的数据集：
 https://github.com/jdg900/MMR
 
+如果后面要拓展多target的分割可以拿来用
+
 ## v2的大量数据训练
 加入SAM3encoder，训练配置为：
 - 192k数据，refcoco按照50%去采样，其余数据占剩下50%
