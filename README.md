@@ -1,4 +1,12 @@
 # SAM3
+
+# 4.15
+
+<img width="963" height="772" alt="image" src="https://github.com/user-attachments/assets/e83b2cd5-c755-4e76-ae22-19c365b3b170" />
+
+
+
+
 # 4.11
 ## image feature失真情况
 做了一下imagefeature在
