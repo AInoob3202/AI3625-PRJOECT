@@ -1,7 +1,28 @@
 # SAM3
 
 # 4.16
+## 问题
+1. 对BCE和Dice来说，能否拿之前的QwenVisionEncoder版尝试配比？因为我感觉现在SAM3和QWEN的两个Encoder不一样，这个loss的配比没有办法参考只有Qwen的，但是目前的训练时间比较长，Qwen更高效一点。
+2. 
+
+## 训练
+刚刚已经全部debug完成，运行了训练，参数为下：
+- GLOBAL_BATCH_SIZE=32，BATCH_PER_DEVICE=1，GRAD_ACCUM_STEPS=4
+- 学习率：总4e-5，merger5e-5，seghead（SAM3decoder和target_projector）5e-5
+- 数据量为256k，和之前0.725的QwenVisionEncoder版对齐
+- SAM3权重从Huggingface上申请到了，SAM3的ViT已经换成了ViT-L
+- $loss=1.0*l_{text}+1.0*l_{seg}$,$l_{seg}=1.0*l_{BCE}+1.0*l_{Dice}$(均衡一点试试，到时候拿小数据跑出来最佳配比）
+- 像素最大最小都为448
+
+<img width="303" height="22" alt="image" src="https://github.com/user-attachments/assets/cb1e18f4-22c5-4618-a71a-259865c5dff2" />
+
 ## debug
+
+## bug-让SAM3的torch的分布式适配deepspeed
+### bug0
+主要问题就是SAM3的很多权重以及接口没有办法适配deepspeed的格式。如果要硬接就会对SAM3进行大改，相对来说AI的幻觉要更多，所以解决方案围绕在保留SAM3源码尽可能不改动，只改动一些小的模块，不适配deepspeed就不适配吧，只要修改到能跑就行。所以对SAM3权重还是按照pytorch的读取方式，除了以下三个bug之外，主要都是ZeRo3的切片问题（好修），以及SAM3权重读取和deepspeed不兼容的问题，这两个问题都通过模仿LISA解决了。
+
+
 ### bug1
 nn.MultiheadAttention 内部有 self.out_proj = NonDynamicallyQuantizableLinear，这是一个子模块，ZeRO-3会分别跟踪它。当 activation checkpoint recompute 时，ZeRO-3 的 submodule hook 没有正确释放。
 
@@ -17,6 +38,10 @@ nn.MultiheadAttention 内部有 self.out_proj = NonDynamicallyQuantizableLinear�
 
 ### bug3
 在model_misc.py中in_proj_weight 把 Q、K、V 合并投影，但 cross attention 时 key 的输入可能维度不同（kdim != embed_dim）。需要分开Q、K、V 的投影权重。
+
+
+
+
 
 # 4.15
 
