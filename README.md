@@ -1,5 +1,12 @@
 # SAM3
 
+# 4.16
+## debug
+因为box/points等geometry prompt我们用不到，如果直接设置为空会报错dtype不对，所以将每一个geometry的入口都做一个提前的对齐：
+- points_direct_project(points) 改为先对齐到 self.points_direct_project.weight.dtype
+- points_pos_enc_project(enc) 改为先对齐到 self.points_pos_enc_project.weight.dtype
+- boxes_direct_project(boxes) 改为先对齐到 self.boxes_direct_project.weight.dtype
+- boxes_pos_enc_project(enc) 改为先对齐到 self.boxes_pos_enc_project.weight.dtype
 # 4.15
 
 发现一个多分割目标的数据集：
