@@ -2,11 +2,22 @@
 
 # 4.16
 ## debug
+### bug1
+nn.MultiheadAttention 内部有 self.out_proj = NonDynamicallyQuantizableLinear，这是一个子模块，ZeRO-3会分别跟踪它。当 activation checkpoint recompute 时，ZeRO-3 的 submodule hook 没有正确释放。
+
+修改：把所有 MultiheadAttentionWrapper 替换成自定义的纯 nn.Linear 实现，完全绕开 nn.MultiheadAttention。
+
+
+### bug2
 因为box/points等geometry prompt我们用不到，如果直接设置为空会报错dtype不对，所以将每一个geometry的入口都做一个提前的对齐：
 - points_direct_project(points) 改为先对齐到 self.points_direct_project.weight.dtype
 - points_pos_enc_project(enc) 改为先对齐到 self.points_pos_enc_project.weight.dtype
 - boxes_direct_project(boxes) 改为先对齐到 self.boxes_direct_project.weight.dtype
 - boxes_pos_enc_project(enc) 改为先对齐到 self.boxes_pos_enc_project.weight.dtype
+
+### bug3
+在model_misc.py中in_proj_weight 把 Q、K、V 合并投影，但 cross attention 时 key 的输入可能维度不同（kdim != embed_dim）。需要分开Q、K、V 的投影权重。
+
 # 4.15
 
 发现一个多分割目标的数据集：
