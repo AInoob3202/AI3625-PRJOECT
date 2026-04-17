@@ -82,7 +82,7 @@ query_embed的200个向量通过 decoder 的 cross-attention 与图像和文本�
 ### debug之后
 <img width="1014" height="598" alt="image" src="https://github.com/user-attachments/assets/fc71f9f9-c5d7-4df2-bc86-80cb21218377" />
 
-<img width="1014" height="598" alt="image" src="https://github.com/user-attachments/assets/0a679e99-3aa7-412a-9ce8-2e5e3ba54443" />
+现在的finalciou涨了将近3倍（从0.1->0.3）
 
 
 ## 一些反思
