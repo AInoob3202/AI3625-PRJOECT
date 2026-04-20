@@ -1,6 +1,50 @@
 # SAM3
 
 
+# 4.20
+## SAM3训练问题
+看到github上一个项目是 https://github.com/Sompote/SAM3_LoRA 里面是拿COCO数据集微调的，一共有21个category，每一张图片都是多个GT mask。它这个数据没有单GT的，也没考虑这种想法。
+
+而且SAM3的数据
+
+## Projector失真问题
+能不能加进去一个将一个targettoken（2048维）信息分离成几乎无损、多维的、适配SAM3 Language space的多个token 序列（256维）。因为SAM3的textEncoder就支持不定长度的输入，所以SAM3的decoder实际上接受的是一堆feature向量去分割，而并非仅限于一个。
+
+### HYPERSEG
+类似于这样
+
+<img width="661" height="783" alt="image" src="https://github.com/user-attachments/assets/a98cd220-91ac-4d53-a80a-159f9f6dd1ef" />
+
+<img width="236" height="246" alt="c7346108-3173-4f4f-9aab-a9865bdd9e6a" src="https://github.com/user-attachments/assets/c4251a6a-f54c-4496-b87e-ab65ec2967da" />
+
+## 为什么自回归
+让多个Projector将targettoken硬生生分离出来256维度的token，不论加上什么限制，都没有办法解决语义坍缩的问题。
+
+这个问题已经在第一轮debug中验证，让target token直接映射到8个256维token去，反而会将target token密集的视觉语义信息丢失（从8改到1的时候，seg_loss将近减少了一倍）
+
+自回归模型能够看之前生成的token去生成下一个，比如例子“a boy handing a cup on the chair”，这一个代表“boy”的phrase会被LLM浓缩到一个2048维度的向量去（类似于一张图片），然后一个小的decoder就会读取这个“图片”，去生成离散的特征：[boy] [chair] [cup] [on the chair]（这里的on the chair就是空间关系的语义信息，并非是生硬的一个phrase）。我们可以设置一个max length，让这个decoder读取从LLM出来的target，去生成这些特征，然后喂入SAM3。
+
+这样不仅符合SAM3原生的那种textembedding模式，而且尽可能保留了信息。
+
+## 数据或者自回归方式？
+### 重头训一个小decoder（AI估计要增加的参数为5M-10M）
+可以从已有的CoA数据中让AI提纯<target>之前描述目标的完整phrase，比如
+
+```markdown
+"segment the man on the left of the woman" the left man<target> -> [the left man] -> [man] [on the left] | length = 2
+"who may be the soccer player in the image" the man wearing the soccer shoes<target> -> [man wearing soccer shoes] -> [man] [wearing] [soccer shoes] | length = 3
+
+```
+只需要训练这个映射的stage2到stage3就行，先训得差不多直接接上去再连这SAM3的decoder一起训就行
+
+### 直接从LLM中提取
+有点像：我感觉本质上类似让MLLM生成target_0到16，然后分别过一个proj[旺柴]
+
+让模型生成不定长度的<feature>在<target>后？
+
+这样的好处是不用再训一个单独的模块，但是数据成本差不多
+
+
 
 
 # 4.17
