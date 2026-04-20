@@ -5,6 +5,20 @@
 ## SAM3训练问题
 看到github上一个项目是 https://github.com/Sompote/SAM3_LoRA 里面是拿COCO数据集微调的，一共有21个category，每一张图片都是多个GT mask。它这个数据没有单GT的，也没考虑这种想法。
 
+现在最大的训练瓶颈就是query的scoring head比较混乱，这是因为SAM3的query是有一个hungrianMatch利用Bbox和iou去匹配的，只不过我之前关闭了这个box的监督项，只依赖iou，而只依赖IoU的话，对query的训练就退化到了只有SAM3的scoring。
+
+在这种情况下，query的选择是这样的：
+score = hs_proj(query_hidden) · prompt_proj(mean_pool_text)
+  - query_hidden：每个 query 经过 decoder 后的特征
+  - mean_pool_text：language prompt 的均值池化特征（我们这里是 target_proj 输出的1个token）
+
+这个打分机制就会导致所有的query向Language prompt进行拟合，确实能够将图中的目标分割出来（所以能够看到理想的query的ciou有0.8~0.9），但是大部分的query的训练方向错了（只为了刷榜排到最优先被选中的，而并非刷泛化到所有的分割任务）。有个非常鲜明的例子就是一张图中有两个人，prompt为其中某一个人，query为了被优先选择，所以就疯狂拟合人的语义，导致最后把两个人全部分割出来了。
+
+现在加入了box监督，那么当有个query纯粹为了被选出来而将图中所有具有相似语义信息的物体都分割出来的时候，box框定住真实的GT，就杀死比赛了。box内和外的mask会对这个query进行监督，让能够分割出真实GT的query来优先被选出。
+
+
+
+
 而且SAM3的数据
 
 ## Projector失真问题
