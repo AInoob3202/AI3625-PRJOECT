@@ -19,8 +19,6 @@ score = hs_proj(query_hidden) · prompt_proj(mean_pool_text)
 
 
 
-而且SAM3的数据
-
 ## Projector失真问题
 能不能加进去一个将一个targettoken（2048维）信息分离成几乎无损、多维的、适配SAM3 Language space的多个token 序列（256维）。因为SAM3的textEncoder就支持不定长度的输入，所以SAM3的decoder实际上接受的是一堆feature向量去分割，而并非仅限于一个。
 
