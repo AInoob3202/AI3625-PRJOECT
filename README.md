@@ -1,5 +1,16 @@
 # SAM3
 
+# 4.21
+Hungarian matcher 选的是"bbox+giou+cls 综合代价最小"的 query，而 IABCEMdetr 把这个 query 设为正样本，监督 scorer
+  给它打高分。
+
+  所以训练的目标就是：让 scorer 学会给 matcher 认为最好的 query 打高分。推理时 pred_logits.argmax() 选的就是 scorer 打分最高的
+   query，和训练目标一致。
+
+  真正的错位风险是：matcher 选的"bbox最优"query 不一定是"mask最优"query。比如某个 query bbox 对得很准，但 mask
+  质量一般；另一个 query mask 很好但 bbox 稍差。matcher 会选前者，scorer 学会选前者，但推理出来的 mask 不是最好的。
+
+  这就是为什么 oracle（按 IoU 选最优 query）总是高于 cIoU（按 scorer 选）——matcher 的选择标准和 mask IoU 不完全对齐。
 
 # 4.20
 ## SAM3训练问题
