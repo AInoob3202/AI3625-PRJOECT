@@ -131,10 +131,6 @@
 }
 
 
-
-
-
-### 
 ## CoT
 
 @inproceedings{NEURIPS2022_9d560961,
@@ -191,6 +187,14 @@ year={2023},
 url={https://openreview.net/forum?id=1PL1NIMMrw}
 }
 
+@inproceedings{lu2022learn,
+    title={Learn to Explain: Multimodal Reasoning via Thought Chains for Science Question Answering},
+    author={Lu, Pan and Mishra, Swaroop and Xia, Tony and Qiu, Liang and Chang, Kai-Wei and Zhu, Song-Chun and Tafjord, Oyvind and Clark, Peter and Ashwin Kalyan},
+    booktitle={The 36th Conference on Neural Information Processing Systems (NeurIPS)},
+    year={2022}
+}
+
+
 ## Reasoning Segmentation
 
 @inproceedings{bao2024cores,
@@ -202,7 +206,73 @@ url={https://openreview.net/forum?id=1PL1NIMMrw}
   organization={Springer}
 }
 
+@article{wei2024hyperseg,
+  title={HyperSeg: Towards Universal Visual Segmentation with Large Language Model},
+  author={Wei, Cong and Zhong, Yujie and Tan, Haoxian and Liu, Yong and Zhao, Zheng and Hu, Jie and Yang, Yujiu},
+  journal={arXiv preprint arXiv:2411.17606},
+  year={2024}
+}
 
+@article{wang2024segllm,
+  title={SegLLM: Multi-round Reasoning Segmentation},
+  author={Wang, XuDong and Zhang, Shaolun and Li, Shufan and Kallidromitis, Konstantinos and Li, Kehan and Kato, Yusuke and Kozuka, Kazuki and Darrell, Trevor},
+  journal={arXiv preprint arXiv:2410.18923},
+  year={2024}
+}
 
+@inproceedings{zhang2025psalm,
+  title={Psalm: Pixelwise segmentation with large multi-modal model},
+  author={Zhang, Zheng and Ma, Yeyao and Zhang, Enming and Bai, Xiang},
+  booktitle={European Conference on Computer Vision},
+  pages={74--91},
+  year={2025},
+  organization={Springer}
+}
 
-<img width="1663" height="595" alt="image" src="https://github.com/user-attachments/assets/6c43981e-77e8-4f21-82a1-b1f092e0f263" />
+@article{wei2024instructseg,
+  title={InstructSeg: Unifying Instructed Visual Segmentation with Multi-modal Large Language Models},
+  author={Wei, Cong and Zhong, Yujie and Tan, Haoxian and Zeng, Yingsen and Liu, Yong and Zhao, Zheng and Yang, Yujiu},
+  journal={arXiv preprint arXiv:2412.14006},
+  year={2024}
+}
+
+@inproceedings{qian2024reasoning,
+  title={Reasoning to Attend: Try to Understand How< SEG> Token Works},
+  author={Qian, Rui and Yin, Xin and Dou, Dejing},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2025}
+}
+
+@inproceedings{liu2025unipixel,
+  title={UniPixel: Unified Object Referring and Segmentation for Pixel-Level Visual Reasoning},
+  author={Liu, Ye and Ma, Zongyang and Pu, Junfu and Qi, Zhongang and Wu, Yang and Ying, Shan and Chen, Chang Wen},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2025}
+}
+
+@inproceedings{lu2025rsvp,
+  title     = {RSVP: Reasoning Segmentation via Visual Prompting and Multi-modal Chain-of-Thought},
+  author    = {Lu, Yi and Cao, Jiawang and Wu, Yongliang and Li, Bozheng and Tang, Licheng and Ji, Yangguang and Wu, Chong and Wu, Jay and Zhu, Wenbo},
+  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics},
+  year      = {2025},
+  publisher = {Association for Computational Linguistics},
+  url       = {https://arxiv.org/abs/2506.04277},
+  doi       = {10.48550/arXiv.2506.04277}
+}
+
+@misc{Osprey,
+  title={Osprey: Pixel Understanding with Visual Instruction Tuning},
+  author={Yuqian Yuan, Wentong Li, Jian Liu, Dongqi Tang, Xinjie Luo, Chi Qin, Lei Zhang and Jianke Zhu},
+  year={2023},
+  eprint={2312.10032},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}
+
+@misc{ren2023pixellm,
+  author= {Zhongwei Ren and Zhicheng Huang and Yunchao Wei and Yao Zhao and Dongmei Fu and Jiashi Feng and Xiaojie Jin},
+  title = {PixelLM: Pixel Reasoning with Large Multimodal Model},
+  year={2023},
+  eprint={2312.02228},
+  archivePrefix={arXiv}
+}
