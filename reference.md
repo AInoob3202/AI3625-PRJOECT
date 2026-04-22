@@ -276,3 +276,89 @@ url={https://openreview.net/forum?id=1PL1NIMMrw}
   eprint={2312.02228},
   archivePrefix={arXiv}
 }
+
+@misc{zhu2025lens,
+    title={LENS: Learning to Segment Anything with Unified Reinforced Reasoning},
+    author={Lianghui Zhu and Bin Ouyang and Yuxuan Zhang and Tianheng Cheng and Rui Hu and Haocheng Shen and Longjin Ran and Xiaoxin Chen and Li Yu and Wenyu Liu and Xinggang Wang},
+    year={2025},
+    eprint={2508.14153},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+
+@article{wang2025pixelthink,
+  title     = {PixelThink: Towards Efficient Chain-of-Pixel Reasoning},
+  author    = {Wang, Song and Fang, Gongfan and Kong, Lingdong and Li, Xiangtai and Xu, Jianyun and Yang, Sheng and Li, Qiang and Zhu, Jianke and Wang, Xinchao},
+  journal   = {arXiv preprint arXiv:2505.23727},
+  year      = {2025},
+}
+
+@article{hanoona2023GLaMM,
+title={GLaMM: Pixel Grounding Large Multimodal Model},
+author={Rasheed, Hanoona and Maaz, Muhammad and Shaji, Sahal and Shaker, Abdelrahman and Khan, Salman and Cholakkal, Hisham and Anwer, Rao M. and Xing, Eric and Yang, Ming-Hsuan and Khan, Fahad S.},
+journal={The IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+year={2024}
+}
+
+@article{liu2025segzero,
+  title        = {Seg-Zero: Reasoning-Chain Guided  Segmentation via Cognitive Reinforcement},
+  author       = {Liu, Yuqi and Peng, Bohao and Zhong, Zhisheng and Yue, Zihao and Lu, Fanbin and Yu, Bei and Jia, Jiaya},
+  journal      = {arXiv preprint arXiv:2503.06520},
+  year         = {2025}
+}
+
+@article{liu2025visionreasoner,
+  title        = {VisionReasoner: Unified Visual Perception and Reasoning via Reinforcement Learning},
+  author       = {Liu, Yuqi and Qu, Tianyuan and Zhong, Zhisheng and Peng, Bohao and Liu, Shu and Yu, Bei and Jia, Jiaya},
+  journal = {arXiv preprint arXiv:2505.12081},
+  year         = {2025}
+}
+
+@article{you2025segr1,
+  title     = {{Seg-R1}: Segmentation Can Be Surprisingly Simple with Reinforcement Learning},
+  author    = {You, Zuyao and Wu, Zuxuan},
+  journal   = {arXiv preprint arXiv:2506.22624},
+  year      = {2025}
+}
+
+@article{guo2024mammothvlelicitingmultimodalreasoning,
+    title={MAmmoTH-VL: Eliciting Multimodal Reasoning with Instruction Tuning at Scale}, 
+    author={Jarvis Guo and Tuney Zheng and Yuelin Bai and Bo Li and Yubo Wang and King Zhu and Yizhi Li and Graham Neubig and Wenhu Chen and Xiang Yue},
+    year={2024},
+    eprint={2412.05237},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL},
+    url={https://arxiv.org/abs/2412.05237}, 
+}
+
+@article{kao2026cot,
+title={CoT-Seg: Rethinking Segmentation with Chain-of-Thought Reasoning and Self-Correction},
+author={Kao, Shiu-hong and Huang, Chak Ho and Liu, Huaiqian and Tai, Yu-Wing and Tang, Chi-Keung},
+journal={arXiv preprint arXiv:2601.17420},
+year={2026}
+}
+
+@inproceedings{zhu2025popen,
+  title={Popen: Preference-based optimization and ensemble for lvlm-based reasoning segmentation},
+  author={Zhu, Lanyun and Chen, Tianrun and Xu, Qianxiong and Liu, Xuanyi and Ji, Deyi and Wu, Haiyang and Soh, De Wen and Liu, Jun},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={30231--30240},
+  year={2025}
+}
+
+@inproceedings{
+du2026samveteran,
+title={{SAM}-Veteran: An {MLLM}-Based Human-like {SAM} Agent for Reasoning Segmentation},
+author={Tianyuan Du and Haopeng Li and Zhen Fan and Jiarui Zhang and Panwang Pan and Yang Zhang},
+booktitle={The Fourteenth International Conference on Learning Representations},
+year={2026},
+url={https://openreview.net/forum?id=oN55r8iJJW}
+}
+
+@article{shao2024visual,
+title={Visual cot: Unleashing chain-of-thought reasoning in multi-modal language models},
+author={Shao, Hao and Qian, Shengju and Xiao, Han and Song, Guanglu and Zong, Zhuofan and Wang, Letian and Liu, Yu and Li, Hongsheng},
+journal={arXiv preprint arXiv:2403.16999},
+year={2024}
+}
+      
